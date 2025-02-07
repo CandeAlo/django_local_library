@@ -2,10 +2,11 @@ from django.db import models
 
 # Create your models here.
 
-from django.urls import reverse # Used in get_absolute_url() to get URL for specified ID
+from django.urls import reverse  # Used in get_absolute_url() to get URL for specified ID
+from django.db.models import UniqueConstraint  # Constrains fields to unique values
+from django.db.models.functions import Lower  # Returns lower cased value of field
+import uuid  # Required for unique book instances
 
-from django.db.models import UniqueConstraint # Constrains fields to unique values
-from django.db.models.functions import Lower # Returns lower cased value of field
 
 class Genre(models.Model):
     """Model representing a book genre."""
@@ -28,7 +29,7 @@ class Genre(models.Model):
             UniqueConstraint(
                 Lower('name'),
                 name='genre_name_case_insensitive_unique',
-                violation_error_message = "Genre already exists (case insensitive match)"
+                violation_error_message="Genre already exists (case insensitive match)"
             ),
         ]
 
@@ -54,7 +55,7 @@ class Language(models.Model):
             UniqueConstraint(
                 Lower('name'),
                 name='language_name_case_insensitive_unique',
-                violation_error_message = "Language already exists (case insensitive match)"
+                violation_error_message="Language already exists (case insensitive match)"
             ),
         ]
 
@@ -77,9 +78,9 @@ class Book(models.Model):
     # Genre class has already been defined so we can specify the object above.
     genre = models.ManyToManyField(
         Genre, help_text="Select a genre for this book")
-    
+
     language = models.ForeignKey(
-        Language, help_text="Select a language for this book", 
+        Language, help_text="Select a language for this book",
         on_delete=models.RESTRICT,
         null=True,)
 
@@ -90,9 +91,7 @@ class Book(models.Model):
     def get_absolute_url(self):
         """Returns the URL to access a detail record for this book."""
         return reverse('book-detail', args=[str(self.id)])
-    
 
-import uuid # Required for unique book instances
 
 class BookInstance(models.Model):
 
@@ -143,4 +142,3 @@ class Author(models.Model):
     def __str__(self):
         """String for representing the Model object."""
         return f'{self.last_name}, {self.first_name}'
-
