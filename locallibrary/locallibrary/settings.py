@@ -136,9 +136,12 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Update database configuration from $DATABASE_URL environment variable (if defined)
 import dj_database_url
-db_from_env = dj_database_url.config(default="postgres://alumnodb:alumnodb@localhost:8000/psi", 
-                                     conn_max_age=500)
-DATABASES["default"].update(db_from_env)
+
+if 'DATABASE_URL' in os.environ:
+    DATABASES['default'] = dj_database_url.config(
+        conn_max_age=500,
+        conn_health_checks=True,
+    )
 
 
 # Static file serving.
