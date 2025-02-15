@@ -6,6 +6,10 @@ from django.urls import reverse  # Used in get_absolute_url() to get URL for spe
 from django.db.models import UniqueConstraint  # Constrains fields to unique values
 from django.db.models.functions import Lower  # Returns lower cased value of field
 import uuid  # Required for unique book instances
+from django.conf import settings
+from datetime import date
+
+
 
 
 class Genre(models.Model):
@@ -127,12 +131,20 @@ class BookInstance(models.Model):
         help_text='Book availability',
     )
 
+    borrower = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
+
     class Meta:
         ordering = ['due_back']
 
     def __str__(self):
         """String for representing the Model object."""
         return f'{self.id} ({self.book.title})'
+    
+    @property
+    def is_overdue(self):
+        """Determines if the book is overdue based on due date and current date."""
+        return bool(self.due_back and date.today() > self.due_back)
+
 
 
 class Author(models.Model):

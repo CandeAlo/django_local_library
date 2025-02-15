@@ -162,3 +162,5 @@ CSRF_TRUSTED_ORIGINS = ['https://CandeAlo.pythonanywhere.com']
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
