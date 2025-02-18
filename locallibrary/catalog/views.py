@@ -21,6 +21,12 @@ def index(request):
 
     a_in_title = Book.objects.filter(title__contains='a').count()
 
+    book_title = request.GET.get('book-title')
+    if book_title is None or book_title.isspace():
+        num_books_with_title = 0
+    else:
+        num_books_with_title = Book.objects.filter(title__icontains=book_title).count()
+
     # Number of visits to this view, as counted in the session variable.
     num_visits = request.session.get('num_visits', 0)
     num_visits += 1
@@ -33,6 +39,7 @@ def index(request):
         'num_authors': num_authors,
         'num_genres': num_genres,
         'a_in_title': a_in_title,
+        'num_books_title': num_books_with_title,
         'num_visits': num_visits,
     }
 
@@ -67,5 +74,18 @@ class LoanedBooksByUserListView(LoginRequiredMixin,generic.ListView):
         return (
             BookInstance.objects.filter(borrower=self.request.user)
             .filter(status__exact='o')
+            .order_by('due_back')
+        )
+
+
+class LoanedBooksListView(LoginRequiredMixin,generic.ListView):
+    """Generic class-based view listing all books on loan"""
+    model = BookInstance
+    template_name = 'catalog/bookinstance_list_borrowed.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        return (
+            BookInstance.objects.filter(status__exact='o')
             .order_by('due_back')
         )

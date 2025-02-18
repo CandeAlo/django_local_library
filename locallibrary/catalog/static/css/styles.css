@@ -1,7 +1,7 @@
 .sidebar-nav {
-        margin-top: 20px;
-        padding: 0;
-        list-style: none;
+  margin-top: 20px;
+  padding: 0;
+  list-style: none;
 }
 
 #logout-form {
@@ -10,5 +10,40 @@
 #logout-form button {
   padding: 0;
   margin: 0;
+  background-color: #aa4104;
+}
+
+button.boton_login{
+  background-color: #04AA6D; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+
+button.boton_logout{
+  background-color: #aa4104; /* Green */
+  border: none;
+  color: rgb(99, 56, 56);
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.button{
+  background-color: #aa4104; /* Green */
+  border: none;
+  color: rgb(99, 56, 56);
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }
       

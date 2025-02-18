@@ -1,0 +1,11 @@
+===========================
+AUTHORS
+===========================
+
+Candela Alonso Fernández (candela.alonsof@estudiante.uam.es)
+ > Git     : candela.alonsof@estudiante.uam.es
+ > Contact : candela.alonsof@estudiante.uam.es
+
+Pablo Tejero Lascorz
+ > Git     : pablo.tejerolascorz@gmail.com
+ > Contact : pablo.tejerol@estudiante.uam.es

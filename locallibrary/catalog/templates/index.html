@@ -1,5 +1,7 @@
 {% extends "base_generic.html" %}
 
+
+
 {% block content %}
   <h1>Local Library Home</h1>
   <p>
@@ -8,16 +10,27 @@
   </p>
   <h2>Dynamic content</h2>
   <p>The library has the following record counts:</p>
-  <ul>
+  <ol class = "lista">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/frontpage-styles.css' %}" />
     <li><strong>Books:</strong> {{ num_books }}</li>
     <li><strong>Copies:</strong> {{ num_instances }}</li>
     <li><strong>Copies available:</strong> {{ num_instances_available }}</li>
     <li><strong>Authors:</strong> {{ num_authors }}</li>
     <li><strong>Genres:</strong> {{ num_genres }}</li>
     <li><strong>Books containing the letter 'a' in the title:</strong> {{ a_in_title }}</li>
-  </ul>
+  </ol>
 
-  <p>
-    You have visited this page {{ num_visits }} time{{ num_visits|pluralize }}.
-  </p>
+  <hr>
+    <form>
+      <label>Search book by title:</label>
+      <input type="text" id="form-book-title" name="book-title">
+    </form>
+    <ul>
+      <p>Number of books with similar title: {{ num_books_title }}</p>
+    </ul>
+  <hr>
+
+  <p>You have visited this page {{ num_visits }} time{{ num_visits|pluralize }}.</p>
+
 {% endblock %}

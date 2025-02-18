@@ -1,7 +1,7 @@
 .sidebar-nav {
-  margin-top: 20px;
-  padding: 0;
-  list-style: none;
+        margin-top: 20px;
+        padding: 0;
+        list-style: none;
 }
 
 #logout-form {
@@ -10,7 +10,6 @@
 #logout-form button {
   padding: 0;
   margin: 0;
-  background-color: #aa4104;
 }
 
 button.boton_login{
